@@ -107,8 +107,8 @@
             "日线",
             "分笔成交",
             "代码表",
-            "1分钟",
-            "5分钟"});
+            "5分钟",
+            "逐笔成交"});
             this.cbDataType.Location = new System.Drawing.Point(482, 18);
             this.cbDataType.Name = "cbDataType";
             this.cbDataType.Size = new System.Drawing.Size(89, 20);

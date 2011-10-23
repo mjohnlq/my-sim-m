@@ -48,7 +48,7 @@ namespace StockInvestmentManagement.BaseData
 
             //以后改写到界面设置中，不要在程序中写死
             //上证指数、深成指数
-            dzhData.SpecificCode = new string[] { "SH000001", "SZ3990001" };
+            dzhData.SpecificCode = new string[] { "SH000001", "SZ399001" };
 
             //沪深A股、深圳创业板
             dzhData.SegularCode = new string[] { "SH60", "SZ00", "SZ30" };
@@ -71,11 +71,20 @@ namespace StockInvestmentManagement.BaseData
                 case "代码表":
                     dt = dzhData.GetStockCode();
                     break;
-                case "1分钟":
-                    //dt = dzhData.GetStockDataLine("1MIN");
-                    break;
                 case "5分钟":
-                    //dt = dzhData.GetStockDataLine("5MIN");
+                    if (tbStockCode.Text.Length > 0)
+                    {
+                        string sc = dzhData.Market + tbStockCode.Text.Trim();
+                        dt = dzhData.GetStockDataLine("5MIN", sc);
+                    }
+                    else
+                    {
+                        dt = dzhData.GetStockDataLine("5MIN", null);
+                    }
+                    break;
+                case "逐笔成交":
+                    string scc = tbStockCode.Text.Trim();
+                    dt = dzhData.GetStockZhuBi(scc);
                     break;
                 default:
                     break;
