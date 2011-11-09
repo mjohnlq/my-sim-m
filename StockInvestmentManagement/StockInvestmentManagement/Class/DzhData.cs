@@ -473,6 +473,7 @@ namespace StockInvestmentManagement.Class
                                 //日线表示19700101开始的天数
                                 //5分钟表示19700101开始的秒数
                                 Int32 t = br.ReadInt32();
+                                //UInt32 t = br.ReadUInt32(); 
                                 if (t == 0)
                                 {
                                     break;
