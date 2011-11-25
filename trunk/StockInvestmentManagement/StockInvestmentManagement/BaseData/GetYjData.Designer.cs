@@ -28,13 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.btnYjStart = new System.Windows.Forms.Button();
             this.btnStopYjData = new System.Windows.Forms.Button();
             this.btnActiveYjData = new System.Windows.Forms.Button();
-            this.bgReport = new System.ComponentModel.BackgroundWorker();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,13 +65,6 @@
             this.btnActiveYjData.UseVisualStyleBackColor = true;
             this.btnActiveYjData.Click += new System.EventHandler(this.btnActiveYjData_Click);
             // 
-            // bgReport
-            // 
-            this.bgReport.WorkerReportsProgress = true;
-            this.bgReport.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgReport_DoWork);
-            this.bgReport.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgReport_ProgressChanged);
-            this.bgReport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgReport_RunWorkerCompleted);
-            // 
             // dataGridView1
             // 
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -87,12 +77,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(755, 350);
             this.dataGridView1.TabIndex = 3;
             // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // GetYjData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -104,6 +88,7 @@
             this.Controls.Add(this.btnYjStart);
             this.Name = "GetYjData";
             this.Text = "GetYjData";
+            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
@@ -114,8 +99,6 @@
         private System.Windows.Forms.Button btnYjStart;
         private System.Windows.Forms.Button btnStopYjData;
         private System.Windows.Forms.Button btnActiveYjData;
-        private System.ComponentModel.BackgroundWorker bgReport;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Timer timer1;
     }
 }

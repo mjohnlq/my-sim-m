@@ -5,18 +5,18 @@ using System.Data;
 using System.IO;
 //using System.Windows.Forms;
 
-namespace StockInvestmentManagement.Class
+namespace StockInvestmentManagement
 {
     /// <summary>
     /// 读取大智慧软件的各种数据
     /// </summary>
-    public class DzhData
+    public  class DzhData
     {
         /// <summary>
         /// 当程序返回结果不正确时，可以查看此信息
         /// </summary>
         private string message = "";
-        public string Message { get { return this.message; } }
+        public  string Message { get { return this.message; } }
 
         /// <summary>
         /// 证券市场，SH或SZ
@@ -29,15 +29,15 @@ namespace StockInvestmentManagement.Class
         public string DataPath { get; set; }
 
         /// <summary>
-        /// 需要获取的特定的证券代码数组，例如指数SH000001，SZ399001
+        /// 需要获取的特定的证券代码数组，例如指数"SH000001,SH1A0001,SZ399001"
         /// </summary>
-        public string[] SpecificCode { get; set; }
+        public string SpecificCode { get; set; }
 
         /// <summary>
         /// 需要获取的有确定编码开头的证券代码数组，
-        /// 例如上证A个SH60开头，深圳A股SZ00开头，创业板SZ30开头
+        /// 例如上证A个SH60开头，深圳A股SZ00开头，创业板SZ30开头,"SH60,SZ00,SZ30"
         /// </summary>
-        public string[] SegularCode { get; set; }
+        public string SegularCode { get; set; }
 
         //计算日期和时间的基准点
         DateTime date19700101 = new DateTime(1970, 1, 1);
@@ -153,7 +153,7 @@ namespace StockInvestmentManagement.Class
                 //以下代码有点冗余，有空再改
 
                 //判断该代码是否是需要的编码开头的代码
-                foreach (string s in this.SegularCode)
+                foreach (string s in this.SegularCode.Split(new string[]{","},StringSplitOptions.None))
                 {
                     if (sc.code.Substring(0, s.Length) == s)
                     {
@@ -173,7 +173,7 @@ namespace StockInvestmentManagement.Class
                 }
 
                 //判断该代码是否是指定的代码，如指数
-                foreach (string s in this.SpecificCode)
+                foreach (string s in this.SegularCode.Split(new string[] { "," }, StringSplitOptions.None))
                 {
                     if (sc.code == s)
                     {
@@ -535,7 +535,7 @@ namespace StockInvestmentManagement.Class
         }
 
         /// <summary>
-        /// 返回证券逐笔成交数据(未完成，大智慧的逐笔成交文件显示的数据不完全，可能加密了，准备放弃）
+        /// 返回证券逐笔成交数据(未完成，大智慧的逐笔成交文件显示的数据不完全，可能加密了，放弃不用）
         /// </summary>
         /// <param name="dataCode">证券代码，例如SH600050，SZ000005</param>
         /// <returns></returns>
