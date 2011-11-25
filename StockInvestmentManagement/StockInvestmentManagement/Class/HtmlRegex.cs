@@ -42,9 +42,9 @@ namespace StockInvestmentManagement
                 content = sr.ReadToEnd();       //读到末尾  
                 str.Close();                    //关闭网络流  
             }
-            catch (Exception ex)
+            catch
             {
-                content = "";   
+                content = "";
             }
             return content;
         }
@@ -59,10 +59,15 @@ namespace StockInvestmentManagement
             if (content.Length == 0)
                 return null;
 
+            //上证指数、深成指数
+            string specificCode = Main.staticAppSetup["SpecificCode"].ToString();
+
+            //沪深A股、深圳创业板
+            string segularCode = Main.staticAppSetup["SegularCode"].ToString();
+
             DataTable dt = new DataTable();
 
             //构建显示证券代码的表格
-            dt.Columns.Add("ID", typeof(Int16));
             dt.Columns.Add("证券代码", typeof(string));
             dt.Columns.Add("证券名称", typeof(string));
             dt.Columns.Add("速记码", typeof(string));
@@ -100,61 +105,34 @@ namespace StockInvestmentManagement
                 gpmc = stock.Substring(6, stock.Length - 23);
 
                 //最后六位为证券代码
-                gpdm = stock.Substring(gpmc.Length + 7, 6);
+                gpdm = gpsc + stock.Substring(gpmc.Length + 7, 6);
 
-                DataRow row = dt.NewRow();
-                row["证券代码"] = gpsc+gpdm;
-                row["证券名称"] = gpmc;
-                row["速记码"] = ChinesePinYin.GetChineseSpell(gpmc);
-
-                //查找静态证券代码表，如果存在，则ID为证券代码ID，不存在则ID=0
-                DataRow[] rows = Main.staticStockCode.Select("证券代码 = '" + row["证券代码"] + "'");
-                if (rows.Length>0)
+                //判断该代码是否是需要的编码开头的代码
+                foreach (string s in segularCode.Split(new string[] { "," }, StringSplitOptions.None))
                 {
-                    row["ID"] = rows[0]["ID"];
-                }
-                else
-                {
-                    row["ID"] = 0;
+                    if (gpdm.Substring(0, s.Length) == s)
+                    {
+                        DataRow row = dt.NewRow();
+                        row["证券代码"] = gpdm;
+                        row["证券名称"] = gpmc;
+                        row["速记码"] = ChinesePinYin.GetChineseSpell(gpmc);
+                        dt.Rows.Add(row);
+                    }
                 }
 
-                dt.Rows.Add(row);
+                //判断该代码是否是指定的代码，如指数
+                foreach (string s in segularCode.Split(new string[] { "," }, StringSplitOptions.None))
+                {
+                    if (gpdm == s)
+                    {
+                        DataRow row = dt.NewRow();
+                        row["证券代码"] = gpdm;
+                        row["证券名称"] = gpmc;
+                        row["速记码"] = ChinesePinYin.GetChineseSpell(gpmc);
+                        dt.Rows.Add(row);
+                    }
+                }
             }
-
-            ////添加上证指数和深成指数（添加一次后就不用了）
-            //DataRow sh = dt.NewRow();
-            //sh["证券代码"] = "999999SH";
-            //sh["证券名称"] = "上证指数";
-            //sh["速记码"] = "SZZS";
-            ////查找静态证券代码表，如果存在，则ID为证券代码ID，不存在则ID=0
-            //DataRow[] rowsh = Main.staticStockCode.Select("证券代码 = '" + sh["证券代码"] + "'");
-            //if (rowsh.Length > 0)
-            //{
-            //    sh["ID"] = rowsh[0]["ID"];
-            //}
-            //else
-            //{
-            //    sh["ID"] = 0;
-            //}
-
-            //dt.Rows.Add(sh);
-
-            //DataRow sz = dt.NewRow();
-            //sz["证券代码"] = "399001SZ";
-            //sz["证券名称"] = "深成指数";
-            //sz["速记码"] = "SCZS";
-            ////查找静态证券代码表，如果存在，则ID为证券代码ID，不存在则ID=0
-            //DataRow[] rowsz = Main.staticStockCode.Select("证券代码 = '" + sz["证券代码"] + "'");
-            //if (rowsz.Length > 0)
-            //{
-            //    sz["ID"] = rowsh[0]["ID"];
-            //}
-            //else
-            //{
-            //    sz["ID"] = 0;
-            //}
-            //dt.Rows.Add(sz);
-
             return dt;
         }
     }

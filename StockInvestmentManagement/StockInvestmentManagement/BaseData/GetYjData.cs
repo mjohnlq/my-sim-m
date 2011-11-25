@@ -18,71 +18,52 @@ namespace StockInvestmentManagement.BaseData
         public GetYjData()
         {
             InitializeComponent();
-            AllocConsole();
+            
+            //控制台显示
+            //AllocConsole();
 
             //初始化行情表
-
             HqTable.Columns.Add("证券代码", typeof(string));
-            HqTable.Columns.Add("证券名称", typeof(string));            
-            HqTable.Columns.Add("昨收", typeof(float));
-            HqTable.Columns.Add("今开", typeof(float));
-            HqTable.Columns.Add("最高", typeof(float));
-            HqTable.Columns.Add("最低", typeof(float));
-            HqTable.Columns.Add("最新", typeof(float));
-            HqTable.Columns.Add("成交量", typeof(float));
-            HqTable.Columns.Add("成交额", typeof(float));
-            HqTable.Columns.Add("买一", typeof(float));
-            HqTable.Columns.Add("买一量", typeof(float));
-            HqTable.Columns.Add("买二", typeof(float));
-            HqTable.Columns.Add("买二量", typeof(float));
-            HqTable.Columns.Add("买三", typeof(float));
-            HqTable.Columns.Add("买三量", typeof(float));
-            HqTable.Columns.Add("买四", typeof(float));
-            HqTable.Columns.Add("买四量", typeof(float));
-            HqTable.Columns.Add("买五", typeof(float));
-            HqTable.Columns.Add("买五量", typeof(float));
-            HqTable.Columns.Add("卖一", typeof(float));
-            HqTable.Columns.Add("卖一量", typeof(float));
-            HqTable.Columns.Add("卖二", typeof(float));
-            HqTable.Columns.Add("卖二量", typeof(float));
-            HqTable.Columns.Add("卖三", typeof(float));
-            HqTable.Columns.Add("卖三量", typeof(float));
-            HqTable.Columns.Add("卖四", typeof(float));
-            HqTable.Columns.Add("卖四量", typeof(float));
-            HqTable.Columns.Add("卖五", typeof(float));
-            HqTable.Columns.Add("卖五量", typeof(float));
+            HqTable.Columns.Add("证券名称", typeof(string));
+            HqTable.Columns.Add("昨收", typeof(Single));
+            HqTable.Columns.Add("今开", typeof(Single));
+            HqTable.Columns.Add("最高", typeof(Single));
+            HqTable.Columns.Add("最低", typeof(Single));
+            HqTable.Columns.Add("最新", typeof(Single));
+            HqTable.Columns.Add("成交量", typeof(Single));
+            HqTable.Columns.Add("成交额", typeof(Single));
+            HqTable.Columns.Add("买一", typeof(Single));
+            HqTable.Columns.Add("买一量", typeof(Single));
+            HqTable.Columns.Add("买二", typeof(Single));
+            HqTable.Columns.Add("买二量", typeof(Single));
+            HqTable.Columns.Add("买三", typeof(Single));
+            HqTable.Columns.Add("买三量", typeof(Single));
+            HqTable.Columns.Add("买四", typeof(Single));
+            HqTable.Columns.Add("买四量", typeof(Single));
+            HqTable.Columns.Add("买五", typeof(Single));
+            HqTable.Columns.Add("买五量", typeof(Single));
+            HqTable.Columns.Add("卖一", typeof(Single));
+            HqTable.Columns.Add("卖一量", typeof(Single));
+            HqTable.Columns.Add("卖二", typeof(Single));
+            HqTable.Columns.Add("卖二量", typeof(Single));
+            HqTable.Columns.Add("卖三", typeof(Single));
+            HqTable.Columns.Add("卖三量", typeof(Single));
+            HqTable.Columns.Add("卖四", typeof(Single));
+            HqTable.Columns.Add("卖四量", typeof(Single));
+            HqTable.Columns.Add("卖五", typeof(Single));
+            HqTable.Columns.Add("卖五量", typeof(Single));
             HqTable.Columns.Add("成交时间", typeof(string));
 
-            //HqTable.Columns.Add("证券代码", typeof(string));
-            //HqTable.Columns.Add("证券名称", typeof(string));
-            //HqTable.Columns.Add("成交时间", typeof(string));
-            //HqTable.Columns.Add("昨收", typeof(string));
-            //HqTable.Columns.Add("今开", typeof(string));
-            //HqTable.Columns.Add("最高", typeof(string));
-            //HqTable.Columns.Add("最低", typeof(string));
-            //HqTable.Columns.Add("最新", typeof(string));
-            //HqTable.Columns.Add("成交量", typeof(string));
-            //HqTable.Columns.Add("成交额", typeof(string));
-            //HqTable.Columns.Add("买一", typeof(string));
-            //HqTable.Columns.Add("买二", typeof(string));
-            //HqTable.Columns.Add("买三", typeof(string));
-            //HqTable.Columns.Add("买四", typeof(string));
-            //HqTable.Columns.Add("买五", typeof(string));
-            //HqTable.Columns.Add("卖一", typeof(string));
-            //HqTable.Columns.Add("卖二", typeof(string));
-            //HqTable.Columns.Add("卖三", typeof(string));
-            //HqTable.Columns.Add("卖四", typeof(string));
-            //HqTable.Columns.Add("卖五", typeof(string));
-            //HqTable.Columns.Add("买一量", typeof(string));
-            //HqTable.Columns.Add("买二量", typeof(string));
-            //HqTable.Columns.Add("买三量", typeof(string));
-            //HqTable.Columns.Add("买四量", typeof(string));
-            //HqTable.Columns.Add("买五量", typeof(string));
-            //HqTable.Columns.Add("卖一量", typeof(string));
-            //HqTable.Columns.Add("卖二量", typeof(string));
-            //HqTable.Columns.Add("卖三量", typeof(string));
-            //HqTable.Columns.Add("卖四量", typeof(string));
-            //HqTable.Columns.Add("卖五量", typeof(string));
+            //初始化分时线数据表
+            MinTable.Columns.Add("证券代码", typeof(string));
+            MinTable.Columns.Add("证券名称", typeof(string));
+            MinTable.Columns.Add("成交时间", typeof(string));
+            MinTable.Columns.Add("最新", typeof(Single));
+            MinTable.Columns.Add("成交量", typeof(Single));
+            MinTable.Columns.Add("成交额", typeof(Single));
+
+            //启动银江
+            Stock_Init(this.Handle, My_Msg_StkData, RCV_WORK_SENDMSG);
         }
 
         /// <summary>
@@ -124,7 +105,16 @@ namespace StockInvestmentManagement.BaseData
         //lParam 指向RCV_DATA结构
 
         //数据通知类型
-        private const int RCV_REPORT = 0x3f001234;       // 接收到行情
+        private const int RCV_REPORT = 0x3f001234;       // 接收到行情数据
+        private const int RCV_FILEDATA = 0x3f001235;     // 接收到文件型数据
+        private const int RCV_FENBIDATA = 0x3f001301;    // 接收到分笔数据
+
+        private const int FILE_HISTORY_EX = 2;           // 接收到日线数据
+        private const int FILE_MINUTE_EX = 4;            // 接收到分钟线数据
+        private const int FILE_POWER_EX = 6;             // 接收到除权数据
+        private const int FILE_5MINUTE_EX = 81;          // 接收到5分钟数据
+        private const UInt32 EKE_HEAD_TAG = 0xffffffff;  // 文件类型数据分隔桢,每个品种的开头以RCV_EKE_HEADEx标识帧开头
+
 
         [StructLayout(LayoutKind.Sequential)]
         struct tag_RCV_DATA
@@ -146,8 +136,6 @@ namespace StockInvestmentManagement.BaseData
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
             public string m_szFileName; // 文件名 or URL
         }
-
-
 
         //行情数据结构V3，一共158字节
         [StructLayout(LayoutKind.Explicit)]
@@ -227,6 +215,38 @@ namespace StockInvestmentManagement.BaseData
         //定义一个行情表，用来存放解析出来的行情
         DataTable HqTable = new DataTable();
 
+        //分时线数据结构
+        [StructLayout(LayoutKind.Explicit)]
+        public struct tag_RCV_MINUTE_STRUCTEx
+        {
+            [FieldOffset(0)]
+            public UInt32 m_time; // UCT
+            [FieldOffset(4)]
+            public Single m_fPrice;
+            [FieldOffset(8)]
+            public Single m_fVolume;
+            [FieldOffset(12)]
+            public Single m_fAmount;
+        }
+
+        //定义一个分时数据表，用来存放解析出来的分时线数据
+        DataTable MinTable = new DataTable();
+
+        //对于补充到的日线、分时数据、5分钟数据，第一祯为标识帧（或称数据头），后面跟数据帧，直到下一个标识帧或包尾，标识帧的时间字段为全FF，里面含市场和代码信息，用于指示后续数据帧是哪个市场哪个品种的。如果将标识帧按照数据帧解释会得出错误的结果。标识帧与数据帧大小总是一致。
+        //补充数据头
+        //数据头 m_dwHeadTag == EKE_HEAD_TAG 
+        [StructLayout(LayoutKind.Sequential)]
+        public struct tag_RCV_EKE_HEADEx
+        {
+            //[FieldOffset(0)]
+            public UInt32 m_dwHeadTag; 		  // = EKE_HEAD_TAG 数据帧头部标识 时间字段全是FF
+            //[FieldOffset(4)]
+            public UInt16 m_wMarket;			  // 市场类型
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = STKLABEL_LEN)]
+            //[FieldOffset(6)]
+            public string m_szLabel;                  // 股票代码,以'\0'结尾
+        }
+
         #endregion
 
 
@@ -240,6 +260,7 @@ namespace StockInvestmentManagement.BaseData
         /// <param name="Msg">Msg 用户自定义消息ID</param>
         /// <param name="nWorkMode">nWorkMode 接口工作方式, 应等于 RCV_WORK_SENDMSG</param>
         /// <returns>1 成功-1 失败</returns>
+
         [DllImport(@"C:\YjStock\Stock.dll")]
         private static extern int Stock_Init(IntPtr hWnd, uint Msg, int nWorkMode);
 
@@ -315,7 +336,9 @@ namespace StockInvestmentManagement.BaseData
         protected override void WndProc(ref Message m)
         {
             tag_RCV_DATA rData;
-            tag_RCV_REPORT_STRUCTExV3 r;
+            tag_RCV_REPORT_STRUCTExV3 rReport;
+            tag_RCV_MINUTE_STRUCTEx rMin;
+            string zqdm = "";
 
             //处理自定义的银江消息
             if (m.Msg == My_Msg_StkData)
@@ -329,122 +352,166 @@ namespace StockInvestmentManagement.BaseData
                 {
                     case RCV_REPORT: //股票行情1056969268
 
+                        #region 接收行情数据
                         HqTable.Clear();
-
-                        Console.WriteLine("收到行情数据");
-
                         for (int i = 0; i < rData.m_nPacketNum; i++)
                         {
-                            r = (tag_RCV_REPORT_STRUCTExV3)
+                            //将指针所指的内存数据转换成行情数据结构，每个行情数据158字节
+                            rReport = (tag_RCV_REPORT_STRUCTExV3)
                                 Marshal.PtrToStructure(
                                 new IntPtr((int)rData.ptr + 158 * i),
                                 typeof(tag_RCV_REPORT_STRUCTExV3));
-
-                            //新建一个backgroundwork，将rData传递到后台处理
-                            //BackgroundWorker bg = new BackgroundWorker();
-                            //bg.WorkerReportsProgress = true;
-                            //bg.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgReport_DoWork);
-                            //bg.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgReport_ProgressChanged);
-                            //bg.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgReport_RunWorkerCompleted);
-                            //bg.RunWorkerAsync(r);
-
-                            string gpsc = "";
-                            if (r.m_wMarket == SH_MARKET_EX)
+                            //提取证券代码
+                            if (rReport.m_wMarket == SH_MARKET_EX)
                             {
-                                gpsc = "SH";
+                                zqdm = "SH" + rReport.m_szLabelName.Substring(0, 6);
                             }
-                            if (r.m_wMarket == SZ_MARKET_EX)
+                            if (rReport.m_wMarket == SZ_MARKET_EX)
                             {
-                                gpsc = "SZ";
+                                zqdm = "SZ" + rReport.m_szLabelName.Substring(0, 6);
                             }
+                            //判断证券代码是否存在于内存表中
+                            DataRow[] arrRows = Main.staticStockCode.Select("证券代码 = '" + zqdm + "'");
+                            if (arrRows.GetLength(0) > 0)
+                            {
+                                DataRow row = HqTable.NewRow();
+                                row["证券代码"] = zqdm;
+                                row["证券名称"] = "";  //没用到，数据库中已有
+                                row["成交时间"] = date19700101.AddSeconds(rReport.m_time).AddHours(8).ToString("yyyy-MM-dd HH:mm:ss");
 
-                            string zqdm = gpsc + r.m_szLabelName.Substring(0, 6);
-                            //DataRow[] arrRows = Main.staticStockHQ.Select("证券代码 = '" + zqdm + "'");
+                                row["昨收"] = rReport.m_fLastClose;
+                                row["今开"] = rReport.m_fOpen;
+                                row["最高"] = rReport.m_fHigh;
+                                row["最低"] = rReport.m_fLow;
+                                row["最新"] = rReport.m_fNewPrice;
+                                row["成交量"] = rReport.m_fVolume;
+                                row["成交额"] = rReport.m_fAmount;
 
-                            DataRow row = HqTable.NewRow();
-                            row["证券代码"] = zqdm;  
-                            row["证券名称"] = "";  //没用到，数据库中已有
-                            row["成交时间"] = date19700101.AddSeconds(r.m_time).AddHours(8).ToString("yyyy-MM-dd HH:mm:ss");
+                                row["买一"] = rReport.m_fBuyPrice1;
+                                row["买二"] = rReport.m_fBuyPrice2;
+                                row["买三"] = rReport.m_fBuyPrice3;
+                                row["买四"] = rReport.m_fBuyPrice4;
+                                row["买五"] = rReport.m_fBuyPrice5;
 
-                            row["昨收"] = r.m_fLastClose;
-                            row["今开"] = r.m_fOpen;
-                            row["最高"] = r.m_fHigh;
-                            row["最低"] = r.m_fLow;
-                            row["最新"] = r.m_fNewPrice;
-                            row["成交量"] = r.m_fVolume;
-                            row["成交额"] = r.m_fAmount;
+                                row["卖一"] = rReport.m_fSellPrice1;
+                                row["卖二"] = rReport.m_fSellPrice2;
+                                row["卖三"] = rReport.m_fSellPrice3;
+                                row["卖四"] = rReport.m_fSellPrice4;
+                                row["卖五"] = rReport.m_fSellPrice5;
 
-                            row["买一"] = r.m_fBuyPrice1;
-                            row["买二"] = r.m_fBuyPrice2;
-                            row["买三"] = r.m_fBuyPrice3;
-                            row["买四"] = r.m_fBuyPrice4;
-                            row["买五"] = r.m_fBuyPrice5;
+                                row["卖一量"] = rReport.m_fSellVolume1;
+                                row["卖二量"] = rReport.m_fSellVolume2;
+                                row["卖三量"] = rReport.m_fSellVolume3;
+                                row["卖四量"] = rReport.m_fSellVolume4;
+                                row["卖五量"] = rReport.m_fSellVolume5;
 
-                            row["卖一"] = r.m_fSellPrice1;
-                            row["卖二"] = r.m_fSellPrice2;
-                            row["卖三"] = r.m_fSellPrice3;
-                            row["卖四"] = r.m_fSellPrice4;
-                            row["卖五"] = r.m_fSellPrice5;
+                                row["买一量"] = rReport.m_fBuyVolume1;
+                                row["买二量"] = rReport.m_fBuyVolume2;
+                                row["买三量"] = rReport.m_fBuyVolume3;
+                                row["买四量"] = rReport.m_fBuyVolume4;
+                                row["买五量"] = rReport.m_fBuyVolume5;
 
-                            row["卖一量"] = r.m_fSellVolume1;
-                            row["卖二量"] = r.m_fSellVolume2;
-                            row["卖三量"] = r.m_fSellVolume3;
-                            row["卖四量"] = r.m_fSellVolume4;
-                            row["卖五量"] = r.m_fSellVolume5;
-
-                            row["买一量"] = r.m_fBuyVolume1;
-                            row["买二量"] = r.m_fBuyVolume2;
-                            row["买三量"] = r.m_fBuyVolume3;
-                            row["买四量"] = r.m_fBuyVolume4;
-                            row["买五量"] = r.m_fBuyVolume5;
-                            //row["昨收"] = r.m_fLastClose.ToString("F2");
-                            //row["今开"] = r.m_fOpen.ToString("F2");
-                            //row["最高"] = r.m_fHigh.ToString("F2");
-                            //row["最低"] = r.m_fLow.ToString("F2");
-                            //row["最新"] = r.m_fNewPrice.ToString("F2");
-                            //row["成交量"] = r.m_fVolume.ToString("F0");
-                            //row["成交额"] = r.m_fAmount.ToString("F0");
-
-                            //row["买一"] = r.m_fBuyPrice1.ToString("F2");
-                            //row["买二"] = r.m_fBuyPrice2.ToString("F2");
-                            //row["买三"] = r.m_fBuyPrice3.ToString("F2");
-                            //row["买四"] = r.m_fBuyPrice4.ToString("F2");
-                            //row["买五"] = r.m_fBuyPrice5.ToString("F2");
-
-                            //row["卖一"] = r.m_fSellPrice1.ToString("F2");
-                            //row["卖二"] = r.m_fSellPrice2.ToString("F2");
-                            //row["卖三"] = r.m_fSellPrice3.ToString("F2");
-                            //row["卖四"] = r.m_fSellPrice4.ToString("F2");
-                            //row["卖五"] = r.m_fSellPrice5.ToString("F2");
-
-                            //row["卖一量"] = r.m_fSellVolume1.ToString("F0");
-                            //row["卖二量"] = r.m_fSellVolume2.ToString("F0");
-                            //row["卖三量"] = r.m_fSellVolume3.ToString("F0");
-                            //row["卖四量"] = r.m_fSellVolume4.ToString("F0");
-                            //row["卖五量"] = r.m_fSellVolume5.ToString("F0");
-
-                            //row["买一量"] = r.m_fBuyVolume1.ToString("F0");
-                            //row["买二量"] = r.m_fBuyVolume2.ToString("F0");
-                            //row["买三量"] = r.m_fBuyVolume3.ToString("F0");
-                            //row["买四量"] = r.m_fBuyVolume4.ToString("F0");
-                            //row["买五量"] = r.m_fBuyVolume5.ToString("F0");
-
-                            HqTable.Rows.Add(row);
-
-                            Console.WriteLine("新数据"+zqdm + "  " + date19700101.AddSeconds(r.m_time).AddHours(8).ToString("yyyy-MM-dd HH:mm:ss") + "  " + r.m_fNewPrice.ToString("F2") + "  " + i.ToString());                            
+                                HqTable.Rows.Add(row);
+                            }
+                            // Console.WriteLine("新数据" + zqdm + "  " + date19700101.AddSeconds(rReport.m_time).AddHours(8).ToString("yyyy-MM-dd HH:mm:ss") + "  " + rReport.m_fNewPrice.ToString("F2") + "  " + i.ToString());
                         }
 
                         //保存到数据库
-                        Console.WriteLine("准备写入数据库");
                         try
                         {
                             db.UpdateHqTVP(HqTable);
                         }
                         catch (Exception exp)
                         {
-                            Console.WriteLine(exp.ToString());
+                            //Console.WriteLine(exp.ToString());
                         }
 
+                        break;
+
+                        #endregion
+
+                    case RCV_FILEDATA:
+                        switch (rData.m_wDataType)
+                        {
+                            case FILE_MINUTE_EX:
+                                #region 接收分时线数据
+                                MinTable.Clear();
+                                // Console.WriteLine("收到分时线数据");
+                                for (int i = 0; i < rData.m_nPacketNum; i++)
+                                {
+                                    //将指针所指的内存数据转换成分时结构，每个分时线数据16字节
+                                    rMin = (tag_RCV_MINUTE_STRUCTEx)
+                                        Marshal.PtrToStructure(
+                                        new IntPtr((int)rData.ptr + 16 * i),
+                                        typeof(tag_RCV_MINUTE_STRUCTEx));
+
+                                    //判断是不是一个新的股票标识,如果是，转换成数据头结构，更新当前的股票代码
+                                    if (rMin.m_time == EKE_HEAD_TAG)
+                                    {
+                                        //在更新证券代码代码前，将上一次证券代码的分时线数据保存到数据库中，这样每次传送的Table只含有一个证券的数据，简化操作
+                                        if (zqdm != "")
+                                        {
+                                            try
+                                            {
+                                                db.UpdateMinTVP(zqdm, MinTable);
+                                            }
+                                            catch (Exception exp)
+                                            {
+                                                //Console.WriteLine(exp.ToString());
+                                            }
+                                        }
+
+                                        //清空临时表
+                                        MinTable.Clear();
+
+                                        tag_RCV_EKE_HEADEx ekeHead = (tag_RCV_EKE_HEADEx)Marshal.PtrToStructure(new IntPtr((int)rData.ptr + 16 * i), typeof(tag_RCV_EKE_HEADEx));
+                                        //提取股票代码
+                                        if (ekeHead.m_wMarket == SH_MARKET_EX)
+                                        {
+                                            zqdm = "SH" + ekeHead.m_szLabel.Substring(0, 6);
+                                        }
+                                        if (ekeHead.m_wMarket == SZ_MARKET_EX)
+                                        {
+                                            zqdm = "SZ" + ekeHead.m_szLabel.Substring(0, 6);
+                                        }
+                                        //Console.WriteLine("分时线数据证券代码更新为" + zqdm);
+                                    }
+                                    else //不是数据头，则提取分时线数据
+                                    {
+                                        //判断证券代码是否存在于内存表中
+                                        DataRow[] arrRows = Main.staticStockCode.Select("证券代码 = '" + zqdm + "'");
+                                        if (arrRows.GetLength(0) > 0)
+                                        {
+                                            DataRow row = MinTable.NewRow();
+                                            row["证券代码"] = zqdm;
+                                            row["证券名称"] = "";  //没用到，数据库中已有
+                                            row["成交时间"] = date19700101.AddSeconds(rMin.m_time).AddHours(8).ToString("yyyy-MM-dd HH:mm:ss");
+                                            row["最新"] = rMin.m_fPrice;
+                                            row["成交量"] = rMin.m_fVolume;
+                                            row["成交额"] = rMin.m_fAmount;
+
+                                            MinTable.Rows.Add(row);
+                                            //Console.WriteLine("新分时数据" + row["证券代码"] + "  " + row["成交时间"] + "  " + row["最新"].ToString() + "  " + row["成交量"].ToString() + "  " + row["成交额"].ToString() + "  " + i.ToString());
+                                        }
+                                    }
+                                }
+                                break;
+                                #endregion
+                            case FILE_HISTORY_EX:
+                                //Console.WriteLine("收到日线数据");
+                                break;
+                            case FILE_POWER_EX:
+                                //Console.WriteLine("收到除权数据");
+                                break;
+                            case FILE_5MINUTE_EX:
+                                //Console.WriteLine("收到5分钟数据");
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                    case RCV_FENBIDATA:
+                        //Console.WriteLine("收到分笔数据");
                         break;
                     default:
                         break;
@@ -452,84 +519,6 @@ namespace StockInvestmentManagement.BaseData
             }
 
             base.WndProc(ref m); //处理窗口基类其他的消息队列
-        }
-
-        #region 后台处理接收到的行情数据
-        private void bgReport_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-            BackgroundWorker bg = (BackgroundWorker)sender;
-            tag_RCV_REPORT_STRUCTExV3 r = (tag_RCV_REPORT_STRUCTExV3)e.Argument;
-            string gpsc = "";
-            if (r.m_wMarket == SH_MARKET_EX)
-            {
-                gpsc = "SH";
-            }
-            if (r.m_wMarket == SZ_MARKET_EX)
-            {
-                gpsc = "SZ";
-            }
-
-            string zqdm = gpsc + r.m_szLabelName.Substring(0, 6);
-
-            DataRow[] arrRows = Main.staticStockHQ.Select("证券代码 = '" + zqdm + "'");
-            lock (arrRows)
-            {
-                foreach (DataRow row in arrRows)
-                {
-                    row["成交时间"] = date19700101.AddSeconds(r.m_time).ToString("yyyy-MM-dd HH:mm:ss");
-                    row["昨收"] = r.m_fLastClose.ToString("F2");
-                    row["今开"] = r.m_fOpen.ToString("F2");
-                    row["最高"] = r.m_fHigh.ToString("F2");
-                    row["最低"] = r.m_fLow.ToString("F2");
-                    row["最新"] = r.m_fNewPrice.ToString("F2");
-                    row["成交量"] = r.m_fVolume.ToString("F0");
-                    row["成交额"] = r.m_fAmount.ToString("F0");
-
-                    row["买一"] = r.m_fBuyPrice1.ToString("F2");
-                    row["买二"] = r.m_fBuyPrice2.ToString("F2");
-                    row["买三"] = r.m_fBuyPrice3.ToString("F2");
-                    row["买四"] = r.m_fBuyPrice4.ToString("F2");
-                    row["买五"] = r.m_fBuyPrice5.ToString("F2");
-
-                    row["卖一"] = r.m_fSellPrice1.ToString("F2");
-                    row["卖二"] = r.m_fSellPrice2.ToString("F2");
-                    row["卖三"] = r.m_fSellPrice3.ToString("F2");
-                    row["卖四"] = r.m_fSellPrice4.ToString("F2");
-                    row["卖五"] = r.m_fSellPrice5.ToString("F2");
-
-                    row["卖一量"] = r.m_fSellVolume1.ToString("F0");
-                    row["卖二量"] = r.m_fSellVolume2.ToString("F0");
-                    row["卖三量"] = r.m_fSellVolume3.ToString("F0");
-                    row["卖四量"] = r.m_fSellVolume4.ToString("F0");
-                    row["卖五量"] = r.m_fSellVolume5.ToString("F0");
-
-                    row["买一量"] = r.m_fBuyVolume1.ToString("F0");
-                    row["买二量"] = r.m_fBuyVolume2.ToString("F0");
-                    row["买三量"] = r.m_fBuyVolume3.ToString("F0");
-                    row["买四量"] = r.m_fBuyVolume4.ToString("F0");
-                    row["买五量"] = r.m_fBuyVolume5.ToString("F0");
-
-                    this.dataGridView1.DataSource = Main.staticStockHQ;
-                }
-            }
-
-        }
-
-        private void bgReport_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
-        {
-        }
-
-        private void bgReport_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {
-
-        }
-        #endregion
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            //从数据库获取行情
-            this.dataGridView1.DataSource = db.GetStockHq();
-            
-        }
+        }     
     }
 }

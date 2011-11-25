@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -18,21 +18,27 @@ namespace StockInvestmentManagement
         //定义一个静态行情数据表，用来保存每个股票最新的行情数据
         public static DataTable staticStockHQ = new DataTable();
 
-        SqlDal db = new SqlDal();
+        //定义一个静态哈希表，用来保存系统设置选项
+        public static Hashtable staticAppSetup = new Hashtable();
 
         public Main()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
 
         private void Main_Load(object sender, EventArgs e)
         {
-            //读取证券代码到内存表
-            GetStockCode();       
+            SqlDal db = new SqlDal();
+            //读取系统设置到哈希表
+            db.GetAppSetup();
+
+            GetStockData gst = new GetStockData();
+            //读取证券代码填充到内存表
+            gst.GetStockCode();
 
             //保存证券代码到数据库
             db.UpdateStockCodeTVP(staticStockCode);
-    
+
             //定义行情数据表，并初始化
             staticStockHQ.Columns.Add("证券代码", typeof(string));
             staticStockHQ.Columns.Add("证券名称", typeof(string));
@@ -74,57 +80,15 @@ namespace StockInvestmentManagement
 
                 staticStockHQ.Rows.Add(r);
             }
-        }
 
-        /// <summary>
-        /// 读取股票代码表到静态表
-        /// </summary>
-        public static void GetStockCode()
-        {
-            //SqlDal db = new SqlDal();
-            //staticStockCode = db.GetStockCode();
-
-            Class.DzhData dzhData = new Class.DzhData();
-
-            dzhData.DataPath = @"C:\dzh2\data\";
-
-            //以后改写到界面设置中，不要在程序中写死
-            //上证指数、深成指数
-            dzhData.SpecificCode = new string[] { "SH000001", "SZ3990001" };
-
-            //沪深A股、深圳创业板
-            dzhData.SegularCode = new string[] { "SH60", "SZ00", "SZ30" };
-
-            dzhData.Market = "SH";
-            DataTable dtSh = dzhData.GetStockCode();
-            dzhData.Market = "SZ";
-            DataTable dtSZ = dzhData.GetStockCode();
-
-            staticStockCode = dtSh.Copy();
-            staticStockCode.Merge(dtSZ);
-        }
-
-        private void 代码表ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            bool isExist = false;
-
-            foreach (Form childrenForm in this.MdiChildren)
+            //激活银江数据接收窗口
+            string yj = db.GetAppSetupValue("StratYj");
+            if (yj == "1")
             {
-                if (childrenForm.Name == "StockCode")
-                {
-                    isExist = true;
-                    childrenForm.Visible = true;
-                    childrenForm.WindowState = FormWindowState.Normal;
-                    childrenForm.Activate();
-                    return;
-                }
-            }
-            if (!isExist)
-            {
-                BaseData.StockCode frmStockCode = new BaseData.StockCode();
-                frmStockCode.MdiParent = this;
-                frmStockCode.WindowState = FormWindowState.Normal;
-                frmStockCode.Show();
+                BaseData.GetYjData frmGetYjData = new BaseData.GetYjData();
+                frmGetYjData.MdiParent = this;
+                frmGetYjData.WindowState = FormWindowState.Minimized;
+                frmGetYjData.Show();
             }
         }
 
@@ -145,37 +109,11 @@ namespace StockInvestmentManagement
             }
             if (!isExist)
             {
-                BaseData.ReadStockData frmReadStockData = new BaseData.ReadStockData();
+                BaseData.StockDataManage frmReadStockData = new BaseData.StockDataManage();
                 frmReadStockData.MdiParent = this;
                 frmReadStockData.WindowState = FormWindowState.Normal;
                 frmReadStockData.Show();
             }
-        }
-
-        private void 银江接收ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            bool isExist = false;
-
-            foreach (Form childrenForm in this.MdiChildren)
-            {
-                if (childrenForm.Name == "GetYjData")
-                {
-                    isExist = true;
-                    childrenForm.Visible = true;
-                    childrenForm.WindowState = FormWindowState.Normal;
-                    childrenForm.Activate();
-                    return;
-                }
-            }
-            if (!isExist)
-            {
-                BaseData.GetYjData frmGetYjData = new BaseData.GetYjData();
-                frmGetYjData.MdiParent = this;
-                frmGetYjData.WindowState = FormWindowState.Normal;
-                frmGetYjData.Show();
-            }
-        }
-
-        
+        }     
     }
 }
